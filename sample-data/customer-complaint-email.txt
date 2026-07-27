@@ -1,0 +1,11 @@
+From: quality@apollo-pharmacy.example
+Subject: Customer Complaint — Metformin Hydrochloride API
+
+Dear Quality Team,
+
+Apollo Pharmacy has received an issue reported by its compounding unit regarding Metformin Hydrochloride API, IP/BP grade. Two HDPE drums from batch MFH260712A showed unusual off-white discoloration during incoming inspection. The affected quantity is 50 kilograms, 2 HDPE drums. Manufacturing date: July 2026. Expiry date: June 2029.
+
+Please investigate the potential material quality issue and advise on replacement.
+
+Regards,
+Apollo Pharmacy Quality Team
