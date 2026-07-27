@@ -1,9 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.pool import NullPool
 from .config import settings
 
-connect_args = {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
-engine = create_engine(settings.database_url, connect_args=connect_args)
+engine_options = {"pool_pre_ping": True}
+# Supabase's pooler already manages connection pooling. Avoid a second persistent
+# SQLAlchemy pool, which also works cleanly with transaction-mode poolers.
+if "pooler.supabase.com" in settings.database_url:
+    engine_options["poolclass"] = NullPool
+
+engine = create_engine(settings.database_url, **engine_options)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -17,4 +23,3 @@ def get_db():
         yield db
     finally:
         db.close()
-

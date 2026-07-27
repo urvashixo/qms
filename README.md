@@ -5,7 +5,7 @@ An AI-first pharmaceutical complaint management demo. Complaint data is entered 
 ## Stack
 
 - React + Redux Toolkit + Inter
-- Python FastAPI + SQLAlchemy (Postgres-ready; SQLite is the zero-config local default)
+- Python FastAPI + SQLAlchemy with Supabase Postgres
 - LangGraph orchestration with Groq (`gemma2-9b-it`)
 
 ## Run locally
@@ -41,5 +41,12 @@ You can also upload `sample-data/customer-complaint-email.txt`. The API accepts 
 
 ## Environment
 
-`DATABASE_URL` accepts a Postgres SQLAlchemy URL, for example `postgresql+psycopg://user:password@localhost/aivoa`. It defaults to a local SQLite database for quick setup.
+## Supabase database
 
+Create a Supabase project, then copy its **Session pooler** connection string from **Settings → Database → Connect**. First run the supplied SQL schema in the Supabase SQL Editor. Then create `backend/.env` from `backend/.env.example` and set its connection string in SQLAlchemy form:
+
+```env
+DATABASE_URL=postgresql+psycopg://postgres.PROJECT_REF:YOUR_PASSWORD@aws-0-YOUR_REGION.pooler.supabase.com:6543/postgres?sslmode=require
+```
+
+The backend requires this Supabase URL, uses a `NullPool` client configuration behind Supabase's own connection pooler, and validates stale connections before using them. Keep the URL server-side only; never put it in the React app.
