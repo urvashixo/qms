@@ -10,7 +10,7 @@ An AI-first pharmaceutical complaint management demo. Complaint data is entered 
 
 ## Run locally
 
-### Backend
+## Backend
 
 ```powershell
 cd backend
